@@ -80,7 +80,7 @@ class Estacionamento:
                 for chave in self.vagas_carro.keys():
                     if self.vagas_carro[chave] is None:
                         print("Estacionando carro placa " + veiculo.placa)
-                        self.vagas_carro[chave] = veiculo.placa
+                        self.vagas_carro[chave] = veiculo
                         self.total_vagas_livres_carro -=1
                         print("Carro estacionado na " + chave)
                         break
@@ -92,7 +92,7 @@ class Estacionamento:
                 for chave in self.vagas_moto.keys():
                     if self.vagas_moto[chave] is None:
                         print("Estacionando moto placa " + veiculo.placa)
-                        self.vagas_moto[chave] = veiculo.placa
+                        self.vagas_moto[chave] = veiculo
                         self.total_vagas_livres_moto -= 1
                         print("Moto estacionada na " + chave)
                         break
@@ -104,7 +104,7 @@ class Estacionamento:
                                 for chave in self.vagas_carro.keys():
                                     if self.vagas_carro[chave] is None:
                                         print("Estacionando moto placa " + veiculo.placa)
-                                        self.vagas_carro[chave] = veiculo.placa
+                                        self.vagas_carro[chave] = veiculo
                                         self.total_vagas_livres_carro -=1
                                         print("Moto estacionada na " + chave)
                                         break
