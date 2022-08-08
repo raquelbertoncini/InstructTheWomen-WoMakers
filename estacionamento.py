@@ -76,19 +76,20 @@ class Estacionamento:
     def estacionar(self, veiculo):
         opcao = str(input('Carro (C) ou Moto (M): ')).upper()
         if opcao == "C":
-            if self.get_vagas_carro() <= 5:
+            if self.get_vagas_carro() > 0:
                 for chave in self.vagas_carro.keys():
                     if self.vagas_carro[chave] is None:
+                        print("- "*10)
                         print("Estacionando carro placa " + veiculo.placa)
                         self.vagas_carro[chave] = veiculo
                         self.total_vagas_livres_carro -=1
                         print("Carro estacionado na " + chave)
                         break
-                    else:
-                        print('Não há mais vagas de carro disponíveis!')
+            else:
+                print('Não há mais vagas de carro disponíveis!')
                     
         elif opcao == "M":
-            if self.get_vagas_moto() <= 5:
+            if self.get_vagas_moto() > 0:
                 for chave in self.vagas_moto.keys():
                     if self.vagas_moto[chave] is None:
                         print("Estacionando moto placa " + veiculo.placa)
@@ -96,20 +97,19 @@ class Estacionamento:
                         self.total_vagas_livres_moto -= 1
                         print("Moto estacionada na " + chave)
                         break
-                    else: 
-                        print('Não há mais vagas de moto disponíveis!')
-                        mudar = str(input('Deseja estacionar na vaga de carro?\n(S) sim\n(N) não\n')).upper()
-                        if mudar == 'S':
-                            if self.get_vagas_carro <= 5:
-                                for chave in self.vagas_carro.keys():
-                                    if self.vagas_carro[chave] is None:
-                                        print("Estacionando moto placa " + veiculo.placa)
-                                        self.vagas_carro[chave] = veiculo
-                                        self.total_vagas_livres_carro -=1
-                                        print("Moto estacionada na " + chave)
-                                        break
-                                    else:
-                                        print('Não há mais vagas disponíveis no estacionamento')
+            else: 
+                print('Não há mais vagas de moto disponíveis!')
+                mudar = str(input('Deseja estacionar na vaga de carro?\n(S) sim\n(N) não\n')).upper()
+                if mudar == 'S':
+                    for chave in self.vagas_carro.keys():
+                        if self.vagas_carro[chave] is None:
+                            print("Estacionando moto placa " + veiculo.placa)
+                            self.vagas_carro[chave] = veiculo
+                            self.total_vagas_livres_carro -=1
+                            print("Moto estacionada na " + chave)
+                            break
+                else:
+                    print('Não há mais vagas disponíveis no estacionamento')
 
         else:
             print('Opção de veículo inválida.')
@@ -145,6 +145,7 @@ def estado_do_estacionamento(estacionamento):
     print('--- Ocupação atual:---')
     print(f'Vagas de carro disponíveis: {estacionamento.get_vagas_carro()}')
     print(f'Vagas de moto disponíveis: {estacionamento.get_vagas_moto()}')
+    print('-'*10)
 
 
 def remover(estacionamento):
